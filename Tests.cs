@@ -21,6 +21,7 @@ namespace SeleniumDemo
                 Driver.Manage().Cookies.DeleteAllCookies(); 
             }
         }
+        
         [TestMethod]
         public void Register()
         {
@@ -35,6 +36,16 @@ namespace SeleniumDemo
             Assert.AreEqual("Registration complete. Please check your email.", Driver.FindElement(By.CssSelector(".message")).Text);
 
         }
+        
+        public void Login()
+        {
+
+            this.Driver.Navigate().GoToUrl("http://store.demoqa.com/wp-login.php");
+            Driver.FindElement(By.Id("user_login")).SendKeys("SBonova");
+            Driver.FindElement(By.Id("user_pass")).SendKeys("5WLwf*t7JFBspE4U");
+            Driver.FindElement(By.Id("wp-submit")).Click();
+            Assert.AreEqual("SBonova", Driver.FindElement(By.ClassName("display-name")).Text);
+        }
 
         [TestMethod]
         public void Rate()
@@ -47,6 +58,7 @@ namespace SeleniumDemo
            
 
         }
+        
         [TestCleanup]
         public void CloseBrowser()
         {
